@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { PAYMENT_METHODS } from "@/constants";
 import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
+
 
 const PaymentIcons: Record<string, JSX.Element> = {
   "Paytech": (
@@ -61,26 +63,24 @@ export function PaymentModal({ open, onOpenChange, eventTitle, totalAmount, tick
 
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(("http://localhost:8000/api/transactions/paytech"), 
-      {
-        method: "POST",
-        headers: { 
-          Authorization: `Bearer ${token}`, 
-          "Content-Type": "application/json" 
-        },
-        
-        body: JSON.stringify({ 
+      const res = await axios.post(
+        "http://localhost:8000/api/transactions/paytech",
+        {
           ticketBought: ticketBought,
-        }),
-      });
-
-      if (!res.ok) throw new Error("Erreur lors de la communication avec le serveur.");
-
-      const data = await res.json();
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      const data = res.data;
 
       // Redirection vers la page de paiement (par exemple de Paytech)
-      if (data.redirect_url) {
-        window.location.href = data.redirect_url;
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
       } else {
         toast({
           title: "Erreur",

@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 
 axios.defaults.withCredentials = true;
 type User = {
-  role: "admin" | "organisateur" | "user";
+  role: "admin" | "organizer" | "user";
   email: string;
   name: string;
 };

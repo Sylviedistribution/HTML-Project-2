@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Calendar, MapPin, Clock, Ticket } from "lucide-react";
+import { Calendar, MapPin, Clock, Ticket, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Event } from "@/types";
@@ -67,9 +67,9 @@ export function EventCard({ event, variant = "default" }: EventCardProps) {
 
         <div className="space-y-2 mb-4 text-sm text-gray-600">
           <div className="flex items-center"><Calendar className="w-4 h-4 mr-1 text-eticket-400" /> {formatDate(event.event_date)}</div>
-          <div className="flex items-center"><Clock className="w-4 h-4 mr-1 text-eticket-400" />   {formatTime(event.start_time)}</div>
+          <div className="flex items-center"><Clock className="w-4 h-4 mr-1 text-eticket-400" />   {formatTime(event.start_time)} - {formatTime(event.end_time)}</div>
           <div className="flex items-center"><MapPin className="w-4 h-4 mr-1 text-eticket-400" /> {event.location}</div>
-          <div className="flex items-center"><Ticket className="w-4 h-4 mr-1 text-eticket-400" /> Par {event.organizer_name}</div>
+          <div className="flex items-center"><User className="w-4 h-4 mr-1 text-eticket-400" /> Par {event.organizer_name}</div>
         </div>
 
         <div className="flex items-center justify-between">

@@ -93,7 +93,7 @@ const EventDetail = () => {
     .map(([id, count]) => {
       const category = event.ticket_categories.find(cat => cat.id === Number(id));
       return category
-        ? { name: category.name, number: count }
+        ? { id: category.id, number: count }
         : null;
     })
     .filter(Boolean);
@@ -226,7 +226,7 @@ const EventDetail = () => {
         totalAmount={totalAmount}
         ticketCount={Object.values(ticketCounts).reduce((a, b) => a + b, 0)}
         ticketBought={selectedTickets.reduce((acc, ticket) => {
-          if (ticket) acc[ticket.name] = ticket.number;
+          if (ticket) acc[ticket.id] = ticket.number;
           return acc;
         }, {} as Record<string, number>)} 
         />

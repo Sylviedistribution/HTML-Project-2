@@ -2,15 +2,18 @@
 import { useEffect, useState } from 'react';
 
 export function useCurrentUser() {
-    const [currentUser, setCurrentUser] = useState(null);
-  
-    useEffect(() => {
-      // Récupérer l'utilisateur dans localStorage (ou autre stockage)
-      const user = JSON.parse(localStorage.getItem("user") || "null");
-      if (user) {
-        setCurrentUser(user);
-      }
-    }, []); // L'effet ne se déclenche qu'au montage initial
-  
-    return currentUser;
-  }
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const item = localStorage.getItem("user");
+    console.log("user in localStorage:", item);
+    const user = JSON.parse(item || "null");
+    setCurrentUser(user);
+    setIsLoading(false);
+  }, []);
+
+  return { currentUser, isLoading };
+}
+
+export default useCurrentUser;

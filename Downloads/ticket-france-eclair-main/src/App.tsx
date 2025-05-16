@@ -14,8 +14,10 @@ import UserTickets from "./pages/user/UserTickets";
 import UserProfile from "./pages/user/UserProfile";
 import OrganizerDashboard from "./pages/organizer/OrganizerDashboard";
 import OrganizerEvents from "./pages/organizer/OrganizerEvents";
+import OrganizerEventEdit from "./pages/organizer/EditEvent";
 import OrganizerProfile from "./pages/organizer/OrganizerProfile";
-import EventTicketCategories from "./pages/organizer/EventTicketCategories";
+import CreateTicketCategories from "./pages/organizer/CreateTicketCategories";
+import ListTicketCategories from "./pages/organizer/ListTicketCategories";
 import CreateEvent from "./pages/organizer/CreateEvent";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminEvents from "./pages/admin/Events";
@@ -24,7 +26,7 @@ import AdminUsers from "./pages/admin/Users";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Privacy from "./pages/Privacy";
+import Privacy from "./pages/Privacy"; 
 import Refunds from "./pages/Refunds";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
@@ -120,10 +122,27 @@ const App = () => {
               }
             />
             <Route
+              path="/organizer/events/:id/tickets/create/"
+              element={
+                <ProtectedRoute user={currentUser} allowedRoles={["organizer"]}>
+                  <CreateTicketCategories />
+                </ProtectedRoute>
+              }
+            />
+          
+            <Route
               path="/organizer/events/:id/tickets"
               element={
                 <ProtectedRoute user={currentUser} allowedRoles={["organizer"]}>
-                  <EventTicketCategories />
+                  <ListTicketCategories />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/organizer/events/:id/edit"
+              element={
+                <ProtectedRoute user={currentUser} allowedRoles={["organizer"]}>
+                  <OrganizerEventEdit />
                 </ProtectedRoute>
               }
             />

@@ -17,13 +17,12 @@ import {
 
 interface NavbarProps {
   currentUser?: {
-    fullName: string;
+    name: string;
     role: UserRole;
-    avatar?: string;
+    avatar_url?: string;
   } | null;
   onLogout?: () => void;
 }
-
 // Définition du composant Navbar
 export function Navbar({ currentUser, onLogout }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -39,9 +38,9 @@ export function Navbar({ currentUser, onLogout }: NavbarProps) {
   const closeMenu = () => setIsMenuOpen(false);
 
   // Fonction pour extraire les initiales à partir du nom complet
-  const getInitials = (user?: { fullName?: string }) => {
-    if (!user?.fullName) return "";
-    return user.fullName
+  const getInitials = (user?: { name?: string }) => {
+    if (!user?.name) return "";
+    return user.name
       .split(" ")
       .map((part) => part[0])
       .join("")
@@ -101,13 +100,13 @@ export function Navbar({ currentUser, onLogout }: NavbarProps) {
               <div className="flex items-center space-x-2">
                 <Avatar className="h-8 w-8 border">
                   <AvatarImage
-                    src={currentUser.avatar}
-                    alt={currentUser.fullName}
+                    src={"http://localhost:8000/storage/"+currentUser.avatar_url}
+                    alt={currentUser.name}
                   />
                   <AvatarFallback>{getInitials(currentUser)}</AvatarFallback>
                 </Avatar>
                 <div className="hidden md:block">
-                  <p className="text-sm font-medium">{currentUser.fullName}</p>
+                  <p className="text-sm font-medium">{currentUser.name}</p>
                   <p className="text-xs text-muted-foreground capitalize">
                     {currentUser.role}
                   </p>
@@ -191,13 +190,13 @@ export function Navbar({ currentUser, onLogout }: NavbarProps) {
                 <div className="flex items-center space-x-4 mb-4">
                   <Avatar className="h-10 w-10 border">
                     <AvatarImage
-                      src={currentUser.avatar}
-                      alt={currentUser.fullName}
+                      src={"http://localhost:8000/storage/"+currentUser.avatar_url}
+                      alt={currentUser.name}
                     />
                     <AvatarFallback>{getInitials(currentUser)}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-medium">{currentUser.fullName}</p>
+                    <p className="font-medium">{currentUser.name}</p>
                     <p className="text-sm text-muted-foreground capitalize">
                       {currentUser.role}
                     </p>

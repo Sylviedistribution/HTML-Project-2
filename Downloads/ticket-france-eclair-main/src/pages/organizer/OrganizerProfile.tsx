@@ -32,7 +32,6 @@ const OrganizerProfile = () => {
     try {
      
       const token = localStorage.getItem("token");
-      console.log(token)
 
       const response = await axios.get("http://localhost:8000/api/user/profile", {
         headers: {

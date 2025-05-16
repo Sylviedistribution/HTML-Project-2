@@ -18,9 +18,8 @@ interface LayoutProps {
   currentUser?: User; // ou non optional si toujours fourni
   onLogout?: () => void;
 }
-
 export function Layout({ children, onLogout }: LayoutProps) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate(); // Hook pour redirection
 
   // Récupérer les informations utilisateur dès que le composant est monté
@@ -51,6 +50,7 @@ export function Layout({ children, onLogout }: LayoutProps) {
       <Navbar 
         currentUser={currentUser} 
         onLogout={handleLogout} 
+        
       />
       <main className="flex-grow">
         {children}
